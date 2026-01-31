@@ -2,37 +2,44 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>KoreanBrainGroup - Roblox Clone</title>
+    <title>KoreanBrainGroup - Roblox</title>
     <style>
-        /* 이미지에서 추출한 정밀 색상 값 */
+        /* 로블록스 전용 서체 및 스타일 재현 */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
         :root {
-            --rbx-bg: #F2F4F5;          /* 전체 배경 */
-            --rbx-white: #FFFFFF;       /* 카드 및 네비 배경 */
-            --rbx-border: #DEE1E3;      /* 경계선 */
-            --rbx-blue: #0074FF;        /* 버튼 및 링크 블루 */
-            --text-black: #393B3D;      /* 메인 글자색 */
-            --text-gray: #666666;       /* 보조 글자색 */
-            --shout-bg: #F5F6F7;        /* 샤우트 박스 배경 */
+            --rbx-bg: #F2F4F5;
+            --rbx-nav-bg: #FFFFFF;
+            --rbx-blue: #0074FF;
+            --text-main: #393B3D;
+            --text-secondary: #666767;
+            --border-light: #DEE1E3;
         }
 
-        body {
-            background-color: var(--rbx-bg);
+        body, html {
             margin: 0;
             padding: 0;
-            /* 이미지와 동일한 폰트 느낌을 위해 맑은 고딕/Segoe UI 설정 */
-            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
-            color: var(--text-black);
+            background-color: var(--rbx-bg);
+            /* 로블록스 공식 서체 느낌을 위한 폰트 스택 */
+            font-family: "Gotham SSm A", "Gotham SSm B", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--text-main);
             -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.02em; /* 미세한 자간 조정 */
         }
 
-        /* 1. 상단 네비게이션 (이미지의 비율 그대로 구현) */
-        .header {
-            background-color: var(--rbx-white);
+        /* 스크롤 유도를 위한 높이 */
+        .scroller-view {
+            min-height: 2200px;
+        }
+
+        /* [좌측 상단 로고 포함] 네비게이션 바 */
+        .rbx-navbar {
             height: 40px;
-            border-bottom: 1px solid var(--rbx-border);
+            background-color: var(--rbx-nav-bg);
+            border-bottom: 1px solid var(--border-light);
             display: flex;
             align-items: center;
-            padding: 0 50px;
+            padding: 0 15px;
             position: fixed;
             top: 0;
             left: 0;
@@ -40,225 +47,228 @@
             z-index: 1000;
         }
 
-        .header-inner {
-            width: 1000px;
-            margin: 0 auto;
+        .rbx-logo {
+            width: 30px;
+            height: 30px;
+            background: url('https://images.rbxcdn.com/7c5fe83dffa97250aaddd54178900ea7.png') no-repeat center;
+            background-size: 24px;
+            margin-right: 20px;
+        }
+
+        .nav-items {
             display: flex;
-            align-items: center;
-            gap: 25px;
-            font-size: 14px;
+            gap: 18px;
+            font-size: 15px;
             font-weight: 500;
+            margin-top: -2px;
         }
 
-        .search-container {
-            background: #F2F4F5;
-            border: 1px solid #CED4DA;
-            border-radius: 4px;
-            padding: 4px 10px;
-            width: 250px;
-            color: #ADB5BD;
+        /* 메인 영역 */
+        .main-content {
+            width: 970px;
+            margin: 60px auto 0;
+            padding: 0 10px;
         }
 
-        /* 2. 메인 컨테이너 (스크롤 유도를 위해 높게 설정) */
-        .main-wrapper {
-            width: 1000px;
-            margin: 60px auto 100px; /* 상단바 여백 포함 */
-            min-height: 2000px; /* 강제 스크롤 생성 */
+        .page-title {
+            font-size: 30px;
+            font-weight: 300;
+            margin: 0 0 18px 0;
         }
 
         .content-card {
-            background-color: var(--rbx-white);
-            border: 1px solid var(--rbx-border);
-            padding: 35px 40px;
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-light);
+            padding: 24px;
         }
 
-        h2.page-title {
-            font-size: 32px;
-            font-weight: 400;
-            margin: 0 0 25px 0;
-        }
-
-        /* 3. 그룹 헤더 영역 (이미지 배치 100% 동일화) */
+        /* 그룹 헤더 */
         .group-header {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
 
-        .group-logo {
+        .group-icon {
             width: 150px;
             height: 150px;
-            border: 1px solid var(--rbx-border);
             border-radius: 8px;
+            border: 1px solid var(--border-light);
             background: url('https://tr.rbxcdn.com/39a66d6259f9725f3f38c3501f807804/150/150/Avatar/Png') center/cover;
         }
 
-        .group-meta h1 {
-            font-size: 28px;
-            margin: 0 0 5px 0;
+        .group-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 2px 0;
         }
 
-        .member-pill {
-            background: #E8EAEB;
-            border-radius: 12px;
-            padding: 3px 12px;
-            font-size: 12px;
-            color: var(--text-gray);
+        .owner-link {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .owner-link a { color: var(--rbx-blue); text-decoration: none; font-weight: 500; }
+
+        .member-badge {
             display: inline-block;
-            margin: 10px 0;
+            background-color: #E8EAEB;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
         }
 
-        .join-btn-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+        .description {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        .btn-blue {
+        .btn-join {
             background-color: var(--rbx-blue);
-            color: white;
-            padding: 10px 70px;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 10px 60px;
             border: none;
             border-radius: 4px;
-            font-weight: bold;
-            font-size: 16px;
             cursor: pointer;
         }
 
-        /* 4. 탭 메뉴 (선 두께 및 위치 일치) */
-        .tabs {
-            margin-top: 40px;
-            border-bottom: 2px solid #F2F4F5;
+        /* 탭 메뉴 */
+        .tabs-container {
             display: flex;
+            margin-top: 35px;
+            border-bottom: 1px solid var(--border-light);
         }
 
-        .tab {
-            padding: 12px 35px;
-            font-weight: bold;
-            color: var(--text-gray);
-            cursor: pointer;
+        .tab-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-secondary);
         }
 
-        .tab.active {
-            color: var(--text-black);
-            background-color: #393B3D;
-            color: white;
-            border-radius: 4px 4px 0 0;
+        .tab-btn.active {
+            color: var(--text-main);
+            border-bottom: 4px solid var(--text-main);
+            margin-bottom: -1px;
         }
 
-        /* 5. 샤우트 및 멤버 그리드 */
-        .section-label { font-size: 18px; margin: 30px 0 15px 0; }
+        /* 샤우트 및 멤버 레이아웃 */
+        .section-label { font-size: 18px; font-weight: 500; margin: 30px 0 15px 0; }
         
         .shout-box {
-            background-color: var(--shout-bg);
-            padding: 20px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
+            background-color: #F5F6F7;
             border: 1px solid #E8EAEB;
+            padding: 16px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
-
-        .avatar-circle { width: 50px; height: 50px; border-radius: 50%; background: #DDD; }
 
         .member-grid {
             display: grid;
-            grid-template-columns: repeat(9, 1fr); /* 이미지와 똑같이 9개 배치 */
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(9, 1fr); /* 정확히 9개 일렬 배치 */
+            gap: 14px;
+            margin-top: 15px;
         }
 
-        .member-item { text-align: center; font-size: 11px; }
-        .member-item img { width: 100%; border-radius: 50%; background: #F2F4F5; margin-bottom: 5px; }
+        .member-card { text-align: center; }
+        .member-card img { width: 100%; border-radius: 50%; background: var(--rbx-bg); }
+        .member-name { font-size: 11px; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* 6. 푸터 */
+        /* 하단 푸터 */
         .footer {
             margin-top: 150px;
-            padding: 60px 0;
-            background: white;
-            border-top: 1px solid var(--rbx-border);
+            padding: 50px 0;
+            background: #FFFFFF;
+            border-top: 1px solid var(--border-light);
             text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-inner">
-            <div style="font-size: 24px;">■</div>
-            <span>Charts</span> <span>Marketplace</span> <span>Create</span> <span>Robux</span>
-            <div class="search-container">🔍 Search</div>
-            <div style="margin-left: auto; display: flex; gap: 10px;">
-                <button style="background: var(--rbx-blue); color:white; border:none; padding:5px 15px; border-radius:4px;">Sign Up</button>
-                <button style="background: white; border:1px solid #CCC; padding:5px 15px; border-radius:4px;">Log In</button>
-            </div>
+<div class="scroller-view">
+    <nav class="rbx-navbar">
+        <div class="rbx-logo"></div>
+        <div class="nav-items">
+            <span>Charts</span>
+            <span>Marketplace</span>
+            <span>Create</span>
+            <span>Robux</span>
         </div>
-    </header>
+    </nav>
 
-    <div class="main-wrapper">
+    <main class="main-content">
+        <h2 class="page-title">Communities</h2>
+        
         <div class="content-card">
-            <h2 class="page-title">Communities</h2>
-            
             <div class="group-header">
-                <div class="group-logo"></div>
-                <div class="group-meta">
-                    <h1>KoreanBrainGroup</h1>
-                    <div style="font-size:14px;">By <span style="color:var(--rbx-blue)">Etik4321</span></div>
-                    <div class="member-pill">57 members</div>
-                    <p style="font-size:14px; margin:10px 0;">법적 증거로 사용 <br> <span style="color:var(--rbx-blue); font-weight:bold;">more</span></p>
-                    <div class="join-btn-container">
-                        <button class="btn-blue">Join Community</button>
-                        <button style="background:#EEE; border:none; padding:10px 15px; border-radius:4px;">···</button>
+                <div class="group-icon"></div>
+                <div class="group-info">
+                    <h1 class="group-name">KoreanBrainGroup</h1>
+                    <div class="owner-link">By <a href="#">Etik4321</a></div>
+                    <div class="member-badge">57 members</div>
+                    <div class="description">
+                        법적 증거로 사용 <br>
+                        <a href="#" style="color:var(--rbx-blue); text-decoration:none; font-weight:500;">more</a>
                     </div>
+                    <button class="btn-join">Join Community</button>
                 </div>
             </div>
 
-            <div class="tabs">
-                <div class="tab">About</div>
-                <div class="tab active">About</div>
-                <div class="tab">Store</div>
-                <div class="tab">Affiliates</div>
+            <div class="tabs-container">
+                <div class="tab-btn">About</div>
+                <div class="tab-btn active">About</div>
+                <div class="tab-btn">Store</div>
+                <div class="tab-btn">Affiliates</div>
             </div>
 
-            <div class="section-label">Shout</div>
+            <h3 class="section-label">Shout</h3>
             <div class="shout-box">
-                <div class="avatar-circle"></div>
+                <img src="https://tr.rbxcdn.com/30day-77085785006b5d929966453965568571/150/150/AvatarHeadshot/Png" width="48" height="48" style="border-radius:50%">
                 <div>
-                    <div style="font-weight:bold; font-size:14px;">Etik4321</div>
-                    <div style="font-size:14px;">신 드웹에다 사용됩니다</div>
-                    <div style="font-size:12px; color:#999; margin-top:5px;">Nov 10, 2024 | 12:54 AM</div>
+                    <div style="font-weight:700; font-size:14px;">Etik4321</div>
+                    <div style="font-size:14px; margin-top:2px;">신 드웹에다 사용됩니다</div>
+                    <div style="font-size:12px; color:#ADB1B5; margin-top:4px;">Nov 10, 2024 | 12:54 AM</div>
                 </div>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                <div class="section-label">Members</div>
-                <div style="font-size:14px; color:#666; margin-bottom:15px;">&lt; Page 1 &gt;</div>
+                <h3 class="section-label">Members</h3>
+                <div style="font-size:14px; color:var(--text-secondary); margin-bottom:15px;">Page 1 of 1 <span style="cursor:pointer; margin-left:8px;">&gt;</span></div>
             </div>
-            
-            <div class="member-grid" id="memberGrid">
-                </div>
+
+            <div class="member-grid" id="memberGrid"></div>
         </div>
-    </div>
+    </main>
 
     <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:25px; color:#666; font-size:14px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:center; gap:25px; font-size:14px; color:var(--text-secondary); margin-bottom:20px;">
             <span>About Us</span><span>Jobs</span><span>Blog</span><span>Parents</span><span>Help</span><span>Terms</span><span>Privacy</span>
         </div>
-        <p style="font-size:11px; color:#999; line-height:1.6;">
+        <p style="font-size:12px; color:#999; max-width:800px; margin: 0 auto; line-height:1.6;">
             ©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
         </p>
     </footer>
+</div>
 
-    <script>
-        const members = ["miauguai981", "00_VOID", "MR_GABUT235", "hunter", "Trevor", "Qba345", "izz_mila", "rijw", "arisf_34507"];
-        const grid = document.getElementById('memberGrid');
-        members.forEach(name => {
-            grid.innerHTML += `
-                <div class="member-item">
-                    <img src="https://tr.rbxcdn.com/30day-77085785006b5d929966453965568571/150/150/AvatarHeadshot/Png">
-                    <div>${name}</div>
-                </div>
-            `;
-        });
-    </script>
+<script>
+    const members = ["miauguai981", "00_VOID", "MR_GABUT235", "hunter", "Trevor", "Qba345", "izz_mila", "rijw", "arisf_34507"];
+    const grid = document.getElementById('memberGrid');
+    members.forEach(m => {
+        grid.innerHTML += `
+            <div class="member-card">
+                <img src="https://tr.rbxcdn.com/30day-77085785006b5d929966453965568571/150/150/AvatarHeadshot/Png">
+                <div class="member-name">${m}</div>
+            </div>
+        `;
+    });
+</script>
+
 </body>
 </html>
