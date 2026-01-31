@@ -2,210 +2,212 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub community - Roblox</title>
+    <title>Communities - Roblox</title>
     <style>
-        /* 로블록스 공식 폰트 스타일 재현 */
+        /* 사진 속 배경색과 기본 폰트 설정 */
         body {
             margin: 0;
-            padding: 0;
-            background-color: #f2f4f5; /* 로블록스 특유의 연회색 배경 */
-            font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            background-color: #f2f4f5;
+            font-family: "HCo Gotham SSm", "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #393b3d;
         }
 
-        /* 1. 최상단 내비게이션 (Charts, Marketplace 등) */
-        .rbx-header {
-            background-color: #ffffff;
-            height: 40px;
+        /* [IMG_1397] 상단 흰색 네비게이션 바 */
+        .header {
+            background: #fff;
+            height: 45px;
             display: flex;
             align-items: center;
             padding: 5px 20px;
             border-bottom: 1px solid #d8d8d8;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .rbx-nav-links {
+        .logo { font-size: 24px; font-weight: 900; margin-right: 15px; }
+
+        .search-container {
+            flex-grow: 1;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 7px 10px 7px 35px;
+            border: 1px solid #b8b8b8;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+        }
+
+        .nav-menu {
             display: flex;
-            gap: 25px;
-            margin-left: 20px;
-            font-weight: 600;
-            font-size: 15px;
-            color: #4b4b4b;
+            gap: 40px;
+            margin: 0 auto;
+            font-weight: 500;
+            font-size: 16px;
         }
 
-        .rbx-nav-links span { cursor: pointer; }
-
-        /* 2. 메인 컨테이너 */
-        .main-container {
+        /* [IMG_1397] 메인 그룹 섹션 */
+        .container {
             max-width: 970px;
-            margin: 20px auto;
-            background: #ffffff;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            overflow: hidden;
+            margin: 25px auto;
+            background: #fff;
+            padding-bottom: 30px;
         }
 
-        /* 3. 그룹 헤더 영역 */
         .group-header {
-            padding: 20px;
+            padding: 30px 40px;
             display: flex;
-            align-items: center;
-            border-bottom: 1px solid #e3e3e3;
+            align-items: flex-start;
         }
 
         .group-icon {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: radial-gradient(circle, #ffe600, #0099ff); /* 이미지 대신 그라데이션 */
-            margin-right: 25px;
+            background: url('https://tr.rbxcdn.com/309199676735e5883d29a53f0f7f2b93/150/150/Image/Png'); /* 실제 로고 이미지 */
+            background-size: cover;
+            margin-right: 30px;
         }
 
-        .group-info h1 {
-            margin: 0;
-            font-size: 30px;
-            font-weight: 700;
-        }
-
-        .group-info p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #666;
-        }
+        .group-name { font-size: 32px; font-weight: 700; margin: 0; }
+        .group-by { color: #666; font-size: 15px; margin: 5px 0; }
 
         .join-btn {
-            background-color: #00a2ff;
-            color: white;
+            background-color: #3f73f6; /* 사진 속 파란색 */
+            color: #fff;
             border: none;
-            padding: 8px 35px;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
+            padding: 10px 45px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
             margin-top: 15px;
+            cursor: pointer;
         }
 
-        /* 4. 탭 메뉴 */
+        /* 탭 디자인 */
         .tabs {
             display: flex;
             border-bottom: 1px solid #e3e3e3;
+            margin-top: 10px;
         }
 
         .tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px 0;
+            padding: 15px 70px;
             font-weight: 700;
             color: #666;
             cursor: pointer;
-            border-bottom: 4px solid transparent;
         }
 
         .tab.active {
-            color: #393b3d;
-            border-bottom-color: #393b3d;
+            color: #000;
+            border-bottom: 4px solid #000;
         }
 
-        /* 5. Shout 영역 */
-        .shout-section {
-            padding: 20px;
+        /* [IMG_1398] 멤버 섹션 */
+        .members-section {
+            padding: 20px 40px;
+            border-top: 10px solid #f2f4f5;
         }
 
-        .shout-box {
-            background-color: #f6f7f9;
-            padding: 15px;
-            border-radius: 4px;
+        .members-grid {
             display: flex;
-            gap: 15px;
-        }
-
-        .shout-avatar {
-            width: 48px;
-            height: 48px;
-            background: #ddd;
-            border-radius: 50%;
-        }
-
-        .shout-text b { display: block; margin-bottom: 3px; }
-        .shout-date { font-size: 12px; color: #999; margin-top: 5px; }
-
-        /* 입력창 디자인 */
-        .input-form {
+            justify-content: space-between;
             margin-top: 20px;
-            border: 1px solid #d8d8d8;
-            padding: 15px;
-            border-radius: 4px;
         }
 
-        .input-form input, .input-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #c3c3c3;
-            border-radius: 4px;
-            box-sizing: border-box;
+        .member-card {
+            text-align: center;
+            width: 100px;
+        }
+
+        .member-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+        }
+
+        .member-name { font-size: 13px; margin-top: 5px; color: #333; }
+
+        /* 입력창 전송 버튼 (구글 시트 연동) */
+        .input-area {
+            background: #f9f9f9;
+            margin: 20px 40px;
+            padding: 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="rbx-header">
-    <div style="font-size: 20px; font-weight: 900; color: #393b3d;">□</div>
-    <div class="rbx-nav-links">
-        <span>Charts</span>
-        <span>Marketplace</span>
-        <span>Create</span>
-        <span>Robux</span>
-    </div>
-</div>
-
-<div class="main-container">
-    <div class="group-header">
-        <div class="group-icon"></div>
-        <div class="group-info">
-            <h1>GitHub community</h1>
-            <p>By Etik4321</p>
-            <p><span style="background: #eee; padding: 2px 8px; border-radius: 10px;">57 Members</span></p>
-            <button class="join-btn">Join Community</button>
+    <div class="header">
+        <div class="logo">□</div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search">
+        </div>
+        <div class="nav-menu">
+            <span>Charts</span>
+            <span>Marketplace</span>
+            <span>Create</span>
+            <span>Robux</span>
         </div>
     </div>
 
-    <div class="tabs">
-        <div class="tab active">About</div>
-        <div class="tab">Store</div>
-        <div class="tab">Affiliates</div>
-    </div>
-
-    <div class="shout-section">
-        <h3>Shout</h3>
-        <div class="shout-box">
-            <div class="shout-avatar"></div>
-            <div class="shout-text">
-                <b>Etik4321</b>
-                <span>홍보해주시면 등급 올려드립니다</span>
-                <div class="shout-date">Nov 10, 2024 | 12:14 AM</div>
+    <div class="container">
+        <div style="padding: 20px 40px;"><h2 style="margin:0;">Communities</h2></div>
+        
+        <div class="group-header">
+            <div class="group-icon"></div>
+            <div class="group-details">
+                <h1 class="group-name">GitHub community</h1>
+                <div class="group-by">By Etik4321</div>
+                <div style="background:#eee; padding:2px 10px; border-radius:10px; font-size:12px; display:inline-block; margin-top:10px;">57 Members</div>
+                <br>
+                <button class="join-btn">Join Community</button>
             </div>
         </div>
 
-        <div class="input-form">
-            <h4 style="margin-top: 0;">등급 신청하기</h4>
-            <input type="text" id="name" placeholder="로블록스 닉네임">
-            <textarea id="msg" placeholder="홍보 완료 메시지를 남겨주세요"></textarea>
-            <button onclick="send()" style="background: #00b06f; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">신청 완료</button>
+        <div class="tabs">
+            <div class="tab active">About</div>
+            <div class="tab">Store</div>
+            <div class="tab">Affiliates</div>
+        </div>
+
+        <div style="padding: 20px 40px;">
+            <h3>Shout</h3>
+            <div style="background:#f6f7f9; padding:15px; border-radius:4px; display:flex; gap:15px;">
+                <div style="width:45px; height:45px; background:#ddd; border-radius:50%;"></div>
+                <div>
+                    <b>Etik4321</b><br>
+                    <span>홍보해주시면 등급 올려드립니다</span>
+                    <div style="color:#999; font-size:11px; margin-top:5px;">Nov 10, 2024 | 12:14 AM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="members-section">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Members</h3>
+                <div style="color:#666;">Page 1 &gt;</div>
+            </div>
+            <div class="members-grid">
+                <div class="member-card"><img src="" alt=""><div class="member-name">TSANIY</div></div>
+                <div class="member-card"><img src="" alt=""><div class="member-name">sad</div></div>
+                <div class="member-card"><img src="" alt=""><div class="member-name">FLEMENY_223</div></div>
+                <div class="member-card"><img src="" alt=""><div class="member-name">e5a5z5sbuart...</div></div>
+                <div class="member-card"><img src="" alt=""><div class="member-name">ramagndut</div></div>
+                <div class="member-card"><img src="" alt=""><div class="member-name">Kurniawa</div></div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="name" style="width:100%; padding:10px; margin-bottom:10px;" placeholder="로블록스 닉네임">
+            <button onclick="alert('제출완료')" style="background:#00b06f; color:#fff; border:none; padding:10px 20px; border-radius:4px; font-weight:bold; cursor:pointer;">제출하기</button>
         </div>
     </div>
-</div>
-
-<script>
-    function send() {
-        // 여기에 구글 스크립트 URL을 연동하면 됩니다!
-        alert(document.getElementById('name').value + "님, 신청이 접수되었습니다.");
-    }
-</script>
 
 </body>
 </html>
-
