@@ -1,692 +1,414 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KoreanBrainGroup - Roblox Community</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f2f4f5;
-        }
-
-        /* Header */
-        .header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            width: 28px;
-            height: 28px;
-            background-color: #393b3d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(45deg);
-            border-radius: 3px;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .logo::before {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background-color: white;
-            position: absolute;
-            border-radius: 1.5px;
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: #393b3d;
-            border-radius: 0.5px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .nav {
-            display: flex;
-            gap: 28px;
-            flex: 1;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: #393b3d;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background-color: #f2f4f5;
-            padding: 8px 16px;
-            border-radius: 6px;
-            gap: 8px;
-            flex: 1;
-            max-width: 300px;
-        }
-
-        .search-box input {
-            border: none;
-            background: none;
-            outline: none;
-            font-size: 14px;
-            width: 100%;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 12px;
-            margin-left: auto;
-        }
-
-        .btn {
-            padding: 8px 24px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .btn-primary {
-            background-color: #0066ff;
-            color: white;
-        }
-
-        .btn-secondary {
-            background-color: white;
-            color: #393b3d;
-            border: 1px solid #d1d5d8;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 32px 24px;
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .page-header h1 {
-            font-size: 32px;
-            font-weight: 700;
-        }
-
-        .more-link {
-            color: #0066ff;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Community Card */
-        .community-card {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .community-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .community-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .community-icon::before {
-            content: '▶';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 60px;
-            color: #ffeb3b;
-        }
-
-        .community-info {
-            flex: 1;
-        }
-
-        .community-info h2 {
-            font-size: 28px;
-            margin-bottom: 4px;
-        }
-
-        .community-info .author {
-            color: #606468;
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-
-        .join-btn {
-            background-color: #0066ff;
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            margin-left: auto;
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #606468;
-            padding: 8px;
-        }
-
-        .members-count {
-            color: #606468;
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-
-        .description {
-            color: #393b3d;
-            margin-bottom: 8px;
-        }
-
-        .more-text {
-            color: #0066ff;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 48px;
-            border-bottom: 1px solid #e5e8eb;
-            margin: 32px 0;
-        }
-
-        .tab {
-            padding: 12px 0;
-            color: #606468;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            color: #393b3d;
-            border-bottom-color: #393b3d;
-        }
-
-        /* Shout Section */
-        .shout-section {
-            margin-bottom: 32px;
-        }
-
-        .shout-section h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-        }
-
-        .shout-post {
-            background-color: #f8f9fa;
-            padding: 16px;
-            border-radius: 8px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .shout-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background-color: #ddd;
-        }
-
-        .shout-content {
-            flex: 1;
-        }
-
-        .shout-author {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .shout-text {
-            color: #393b3d;
-            margin-bottom: 8px;
-        }
-
-        .shout-date {
-            color: #606468;
-            font-size: 13px;
-        }
-
-        /* Members Section */
-        .members-section h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .members-controls {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 14px;
-            color: #606468;
-        }
-
-        .members-controls button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            color: #606468;
-        }
-
-        .player-filter {
-            padding: 8px 16px;
-            border: 1px solid #d1d5d8;
-            border-radius: 8px;
-            background: white;
-            font-size: 14px;
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 24px;
-            margin-top: 24px;
-        }
-
-        .member-card {
-            text-align: center;
-        }
-
-        .member-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #e5e8eb;
-            margin-bottom: 8px;
-        }
-
-        .member-name {
-            font-size: 13px;
-            color: #393b3d;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: white;
-            border-top: 1px solid #e5e8eb;
-            padding: 32px 24px;
-            margin-top: 48px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
-            justify-content: center;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #606468;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .footer-text {
-            text-align: center;
-            color: #606468;
-            font-size: 12px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: #2d3338;
-            border-radius: 12px;
-            padding: 48px;
-            width: 90%;
-            max-width: 450px;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: #909499;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .modal-title {
-            color: white;
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .login-input {
-            background-color: #3d4349;
-            border: 1px solid #4d5359;
-            border-radius: 8px;
-            padding: 16px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .login-input::placeholder {
-            color: #909499;
-        }
-
-        .login-input:focus {
-            border-color: #0066ff;
-        }
-
-        .login-button {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        .login-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .forgot-link {
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            margin: 16px 0;
-            display: block;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #4d5359;
-            margin: 24px 0;
-        }
-
-        .secondary-button {
-            background-color: #4d5359;
-            border: none;
-            color: white;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 12px;
-        }
-
-        .secondary-button:hover {
-            background-color: #5d6369;
-        }
-
-        .signup-text {
-            color: white;
-            text-align: center;
-            margin-top: 24px;
-        }
-
-        .signup-text a {
-            color: #0066ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>KoreanBrainGroup - Communities</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f2f3f5;
+    }
+
+    /* 상단 네비게이션 바 */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      padding: 10px 24px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e3e5e8;
+    }
+
+    .top-left-menu {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .top-left-menu a {
+      text-decoration: none;
+      color: #111827;
+    }
+
+    .top-logo {
+      margin-left: 16px;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .top-center-search {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-box {
+      width: 260px;
+      display: flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background-color: #f3f4f6;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      font-size: 13px;
+    }
+
+    .top-right-auth {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      background-color: #ffffff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      color: #ffffff;
+      border-color: #0d6efd;
+    }
+
+    /* 메인 컨테이너 */
+    .page-wrapper {
+      padding: 24px 80px;
+    }
+
+    .page-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .page-title-row h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .more-link {
+      font-size: 14px;
+      color: #4b5563;
+      cursor: pointer;
+    }
+
+    /* 그룹 헤더 */
+    .group-header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .group-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd200, #00bcd4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 800;
+      font-size: 24px;
+    }
+
+    .group-main-info {
+      flex: 1;
+    }
+
+    .group-main-info h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .group-meta {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .group-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-join {
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: none;
+      background-color: #2563eb;
+      color: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-more {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      border: 1px solid #d1d5db;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    /* 탭 영역 */
+    .tabs {
+      display: flex;
+      gap: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 8px 0;
+      font-size: 14px;
+      cursor: pointer;
+      color: #6b7280;
+    }
+
+    .tab-active {
+      color: #111827;
+      border-bottom: 2px solid #111827;
+      margin-bottom: -1px;
+    }
+
+    /* 본문 레이아웃 */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .shout-meta {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .shout-text {
+      font-size: 14px;
+    }
+
+    /* 멤버 영역 */
+    .members-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .members-list {
+      display: flex;
+      gap: 12px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    .member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    .member-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #e5e7eb;
+      margin-bottom: 4px;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .select {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    /* 푸터 */
+    .footer {
+      margin-top: 40px;
+      padding: 20px 80px;
+      font-size: 12px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      background-color: #ffffff;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h2 class="modal-title">Login to Roblox</h2>
-            <form class="login-form">
-                <input type="text" class="login-input" placeholder="Username/Email/Phone">
-                <input type="password" class="login-input" placeholder="Password">
-                <button type="button" class="login-button">Log In</button>
-            </form>
-            <a href="#" class="forgot-link">Forgot Password or Username?</a>
-            <div class="divider"></div>
-            <button class="secondary-button">Email Me a One-Time Code</button>
-            <button class="secondary-button">Quick Sign-in</button>
-            <p class="signup-text">Don't have an account? <a href="#">Sign Up</a></p>
-        </div>
+  <!-- 상단 네비 -->
+  <div class="top-nav">
+    <div class="top-left-menu">
+      <a href="#">Charts</a>
+      <a href="#">Marketplace</a>
+      <a href="#">Create</a>
+      <a href="#">Robux</a>
+    </div>
+    <div class="top-logo">Roblox</div>
+    <div class="top-center-search">
+      <div class="search-box">
+        <span style="font-size:12px; margin-right:6px;">🔍</span>
+        <input type="text" placeholder="Search" />
+      </div>
+    </div>
+    <div class="top-right-auth">
+      <button class="btn">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- 메인 -->
+  <div class="page-wrapper">
+    <div class="page-title-row">
+      <h1>Communities</h1>
+      <span class="more-link">More Communities →</span>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="logo"></div>
-        <nav class="nav">
-            <a href="#">Charts</a>
-            <a href="#">Marketplace</a>
-            <a href="#">Create</a>
-            <a href="#">Robux</a>
-        </nav>
-        <div class="search-box">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.5 6.5C11.5 9.26142 9.26142 11.5 6.5 11.5C3.73858 11.5 1.5 9.26142 1.5 6.5C1.5 3.73858 3.73858 1.5 6.5 1.5C9.26142 1.5 11.5 3.73858 11.5 6.5Z" stroke="#606468" stroke-width="2"/>
-                <path d="M10 10L14.5 14.5" stroke="#606468" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <input type="text" placeholder="Search">
+    <div class="group-header">
+      <div class="group-icon">
+        K
+      </div>
+      <div class="group-main-info">
+        <h2>KoreanBrainGroup</h2>
+        <div class="group-meta">
+          By Etik4321 · 57 Members · 법적 증거로 사용
         </div>
-        <div class="header-buttons">
-            <button class="btn btn-primary">Sign Up</button>
-            <button class="btn btn-secondary">Log In</button>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1>Communities</h1>
-            <a href="#" class="more-link">More Communities →</a>
-        </div>
-
-        <div class="community-card">
-            <div class="community-header">
-                <div class="community-icon"></div>
-                <div class="community-info">
-                    <h2>KoreanBrainGroup</h2>
-                    <p class="author">By Etik4321</p>
-                </div>
-                <button class="join-btn" onclick="openModal()">Join Community</button>
-                <button class="menu-btn">⋯</button>
-            </div>
-
-            <p class="members-count"><strong>57 Members</strong></p>
-            <p class="description">법적 증거로 사용</p>
-            <span class="more-text">more</span>
-
-            <!-- Tabs -->
-            <div class="tabs">
-                <a href="#" class="tab active">About</a>
-                <a href="#" class="tab">Store</a>
-                <a href="#" class="tab">Affiliates</a>
-            </div>
-
-            <!-- Shout Section -->
-            <div class="shout-section">
-                <h3>Shout</h3>
-                <div class="shout-post">
-                    <div class="shout-avatar"></div>
-                    <div class="shout-content">
-                        <div class="shout-author">Etik4321</div>
-                        <div class="shout-text">선 드립때마다 사용합니다</div>
-                        <div class="shout-date">Nov 10, 2024 | 12:14 AM</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Members Section -->
-            <div class="members-section">
-                <h3>
-                    Members
-                    <div class="members-controls">
-                        <button>‹</button>
-                        <span>Page 1</span>
-                        <button>›</button>
-                        <select class="player-filter">
-                            <option>Player[⭐]</option>
-                        </select>
-                    </div>
-                </h3>
-
-                <div class="members-grid">
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">miauguau981</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">00_VOID</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">MR_GABUTI235</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">hunter</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">Trevor</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">Qb6345</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">itzz_mila</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">njw</div>
-                    </div>
-                    <div class="member-card">
-                        <div class="member-avatar"></div>
-                        <div class="member-name">altaf_34507</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="group-actions">
+        <button class="btn-join">Join Community</button>
+        <button class="btn-more">⋯</button>
+      </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="#">About Us</a>
-            <a href="#">Jobs</a>
-            <a href="#">Blog</a>
-            <a href="#">Parents</a>
-            <a href="#">Buy Gift Cards</a>
-            <a href="#">Help</a>
-            <a href="#">Terms</a>
-            <a href="#">Accessibility</a>
-            <a href="#">Privacy</a>
+    <div class="tabs">
+      <div class="tab tab-active">About</div>
+      <div class="tab">Store</div>
+      <div class="tab">Affiliates</div>
+    </div>
+
+    <div class="content-grid">
+      <!-- 왼쪽: Shout 카드 -->
+      <div>
+        <div class="card">
+          <div class="card-title">Shout</div>
+          <div class="shout-meta">Etik4321 · Nov 10, 2024 | 12:14 AM</div>
+          <div class="shout-text">선 트랙때마다 사용합니다</div>
         </div>
-        <p class="footer-text">
-            ©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
-        </p>
-    </footer>
+      </div>
 
-    <script>
-        function openModal() {
-            document.getElementById('loginModal').classList.add('active');
-        }
+      <!-- 오른쪽: Members 카드 -->
+      <div>
+        <div class="card">
+          <div class="members-header">
+            <span class="card-title">Members</span>
+            <div class="pagination">
+              <span>Page 1</span>
+              <span>◀ ▶</span>
+              <select class="select">
+                <option>Player[⭐]</option>
+              </select>
+            </div>
+          </div>
+          <div class="members-list">
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>miaugwau981</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>0Q_VOID</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>MR_GABUT1235</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>hunter</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>Trevor</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>Qb6345</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>itzz_mila</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>njw</span>
+            </div>
+            <div class="member">
+              <div class="member-avatar"></div>
+              <span>altaf_34507</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        function closeModal() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    </script>
+  <!-- 푸터 -->
+  <div class="footer">
+    <div class="footer-links">
+      <span>About Us</span>
+      <span>Jobs</span>
+      <span>Blog</span>
+      <span>Parents</span>
+      <span>Buy Gift Cards</span>
+      <span>Help</span>
+      <span>Terms</span>
+      <span>Accessibility</span>
+      <span>Privacy</span>
+    </div>
+    <div>©2026 Roblox Corporation</div>
+  </div>
 </body>
 </html>
+
